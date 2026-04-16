@@ -18,4 +18,27 @@ import { notFound } from './middlewares/notFound.middleware.js';
  */
 export function createApp() {
   // Your code here
+  const app = express();
+
+  app.use(express.json());
+
+  app.get("/health", (req, res) => {
+    return res.json({ ok: true });
+  })
+
+  app.use("/api/auth", authRoutes);
+  app.use("/api/users", userRoutes);
+
+  app.use((req, res) => {
+    return res.status(404).json({ message: "Route Not Found" })
+  });
+
+  app.use((err, req, res, next) => {
+    res.status(res.statusCode || 500).json({
+      success: false,
+      message: err.message || "Internal Server Error",
+    })
+  });
+
+  return app;
 }
