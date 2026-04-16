@@ -1,6 +1,8 @@
 import { Router } from 'express';
 import { register, login, me } from '../controllers/auth.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
+import { validate } from '../middlewares/validate.middleware.js';
+import registerSchema from '../dto/register.dto.js';
 
 /**
  * TODO: Define auth routes
@@ -13,5 +15,6 @@ import { authenticate } from '../middlewares/auth.middleware.js';
 const router = Router();
 
 // Your routes here
+router.post("/register", validate(registerSchema), register);
 
 export default router;
