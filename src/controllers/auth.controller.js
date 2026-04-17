@@ -65,10 +65,8 @@ export async function login(req, res, next) {
       return res.status(401).json({ error: { message: "Invalid credentials" } })
     }
 
-    const payload = { name: user.name, email: user.email, role: user.role };
-    const token = await jwt.sign(payload, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRES_IN,
-    });
+    const payload = { userId: user._id, name: user.name, email: user.email, role: user.role };
+    const token = signToken(payload);
 
     const userObj = user.toObject();
     delete userObj.password;

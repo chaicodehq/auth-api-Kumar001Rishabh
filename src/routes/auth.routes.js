@@ -3,6 +3,7 @@ import { register, login, me } from '../controllers/auth.controller.js';
 import { authenticate } from '../middlewares/auth.middleware.js';
 import { validate } from '../middlewares/validate.middleware.js';
 import registerSchema from '../dto/register.dto.js';
+import loginSchema from '../dto/login.dto.js';
 
 /**
  * TODO: Define auth routes
@@ -16,5 +17,7 @@ const router = Router();
 
 // Your routes here
 router.post("/register", validate(registerSchema), register);
+router.post("/login", validate(loginSchema), login);
+
 
 export default router;
