@@ -18,6 +18,7 @@ const router = Router();
 // Your routes here
 router.post("/register", validate(registerSchema), register);
 router.post("/login", validate(loginSchema), login);
+router.get("/me", authenticate, me);
 
 
 export default router;

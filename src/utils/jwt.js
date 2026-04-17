@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import "dotenv/config";
 
 /**
  * TODO: Signs a JWT token with the given payload
@@ -71,6 +72,6 @@ export function signToken(payload) {
  */
 export function verifyToken(token) {
   // Your code here
-  const decoded = verifyToken(token, process.env.JWT_SECRET);
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
   return decoded;
 }
